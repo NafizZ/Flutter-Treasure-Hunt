@@ -38,14 +38,15 @@ treasure_hunt_app/
 ├── lib/   
 │   ├── models/
 │   │   └── treasure.dart
+│   ├── providers/
+│   │   └── treasure_provider.dart
 │   ├── services/
 │   │   └── treasure_service.dart
 │   ├── screens/
 │   │   └── treasure_hunt_screen.dart
 │   ├── widgets/
 │   │   └── treasure_marker.dart
-│   └── providers/
-│       └── treasure_provider.dart
+│   └── main.dart
 ├── assets/
 │   ├── map.jpg
 │   └── treasure_icon.jpg
@@ -72,3 +73,7 @@ treasure_hunt_app/
 * **Pan & Zoom**: Drag to pan, pinch to zoom on the map.
 * **View Details**: Tap markers to open treasure info.
 * **Mark Discovered**: Check the box in the dialog; marker color changes and state is saved.
+
+
+## 🧪 link of the Assignment
+* https://github.com/OUTEXua/flutter-treasure-hunt
