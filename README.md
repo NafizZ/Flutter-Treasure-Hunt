@@ -1,64 +1,74 @@
-# 🗺️ Flutter Treasure Hunt — Test Assignment
+# 🗺️ Flutter Treasure Hunt App
 
-A small adventure club wants a simple mobile app where members can see treasures hidden around town.
-Instead of a live map, the app uses a **static image**. Tapping a marker shows details and lets the user mark the treasure as **“discovered.”**
-
----
-
-## 📦 At a Glance
-- **Platform:** Flutter (mobile)
-- **Data:** local, hard-coded
-- **Persistence:** `shared_preferences`
-- **Map:** static image (`assets/map.png`)
-- **No:** backends, map SDKs
-
-<details>
-<summary><b>Submission</b> (click to expand)</summary>
-
-- **Preferred:** Public GitHub repo (or grant access to <code>outex.ua@gmail.com</code>)  
-- **Alternative:** ZIP upload (only if no GitHub link)
-- Include: source code, <code>assets/</code> with map, short run instructions, optional notes
-</details>
+A simple mobile app for an adventure club. Members can find hidden treasures on a static map, view details, mark them as "discovered," and have their progress saved.
 
 ---
 
-## ✅ Requirements
+![Alt text](assets/ss/Screenshot_1.png)
+![Alt text](assets/ss/Screenshot_2.png)
 
-### 1) Home Screen
-- Show a single image (e.g., `assets/map.png`) as the map  
-- Place **≥ 5 markers** at predefined positions on top of the image  
-- Store treasures in a **local hard-coded list** with positions  
-- Allow **pan & zoom** (use `InteractiveViewer`)
+## ✨ Features
 
-**Hint (optional):**
-- Use a `Stack` — base: `Image.asset(...)` wrapped in `InteractiveViewer`  
-- Overlay markers via `Positioned` (or compute offsets in `LayoutBuilder`)  
-- Store positions as **relative percentages** (`x=0.62`, `y=0.35`) and convert to pixels at runtime
-
-### 2) Treasure Details
-On marker tap, show a pop-up or navigate to a details screen with:
-- Name
-- GPS-style/text location (free text; it’s a fake map)
-- Short description (e.g., “Hidden near the old oak tree”)
-- A checkbox **“Discovered”**
-
-### 3) Marking as Discovered
-- Persist the **Discovered** state across app restarts  
-- Use **`shared_preferences`**
-
-### 4) Design Constraints
-- **No backend or API calls** — all data is local  
-- **No map SDKs** (e.g., no `google_maps_flutter`)  
-- Allowed: **`shared_preferences`** and simple state management (e.g., `provider`)  
-- Keep UI **clean and functional** — we grade clarity & working features
+* **Interactive Map**: Pan and zoom on the map image (`assets/map.jpg`).
+* **Treasure Markers**: Over 5 markers show treasure locations.
+* **Treasure Details**: Tap a marker to see its name, location text, and description.
+* **"Discovered" State**: Check a box to mark treasures as found.
+* **Persistence**: Discovered states are saved locally using `shared_preferences`.
+* No backend, APIs, or map SDKs are used.
 
 ---
 
-## 🧪 Sample Data (adjust to your image)
+## 💻 Codebase Overview
 
-```text
-1. Golden Oak          — x=0.18, y=0.72 — "Hidden near a large oak tree"
-2. River Rock Gem      — x=0.55, y=0.60 — "Under the big rock by the river"
-3. Market Square Coin  — x=0.40, y=0.28 — "Buried in the old market square"
-4. Lighthouse Pearl    — x=0.80, y=0.20 — "Inside a secret compartment"
-5. Hilltop Crown       — x=0.68, y=0.10 — "At the very top of the hill"
+This project follows Flutter best practices for a clean, modular, and scalable design:
+
+* **Models (`lib/models`)**: Defines the `Treasure` data structure.
+* **Services (`lib/services`)**: Manages data, including `shared_preferences` persistence and providing the static list of treasures.
+* **Providers (`lib/providers`)**: Handles application state using the **`provider` package**. It loads treasure data and notifies UI components of "discovered" state changes.
+* **Screens (`lib/screens`)**: The main UI (`TreasureHuntScreen`) consumes state from `TreasureProvider` to display the map and markers.
+* **Widgets (`lib/widgets`)**: Reusable UI components like `TreasureMarker`.
+
+This architecture ensures clear **separation of concerns** for better maintainability and testability.
+
+### Folder Structure
+
+
+```plaintext
+treasure_hunt_app/
+├── lib/   
+│   ├── models/
+│   │   └── treasure.dart
+│   ├── services/
+│   │   └── treasure_service.dart
+│   ├── screens/
+│   │   └── treasure_hunt_screen.dart
+│   ├── widgets/
+│   │   └── treasure_marker.dart
+│   └── providers/
+│       └── treasure_provider.dart
+├── assets/
+│   ├── map.jpg
+│   └── treasure_icon.jpg
+└── pubspec.yaml
+``` 
+
+
+
+
+---
+
+## 🚀 Installation & Setup
+
+1.  **Prerequisites**: [Flutter SDK](https://flutter.dev/docs/get-started/install).
+2.  **Navigate to Project**: `cd treasure_hunt_app`.
+3.  **Add Assets**: Place `map.jpg` (your `IMG_3677.JPG`) and `treasure_icon.png` (your `IMG_3678.JPG`) in the `assets/` folder.
+4.  **Install Dependencies**: `flutter pub get`.
+5.  **Run**: `flutter run`.
+
+---
+
+## 🎮 How to Use
+
+* **Pan & Zoom**: Drag to pan, pinch to zoom on the map.
+* **View Details**: Tap markers to open treasure info.
+* **Mark Discovered**: Check the box in the dialog; marker color changes and state is saved.
